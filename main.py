@@ -25,9 +25,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
 @bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
-    await m.reply_text(f"😈**Hi bruh!**\n**🟢I'm Alive You can Use by /master**\n\n**<-URL Acceptable->**\n-`All Non-Drm+Drm Protected Url`\n-`Mpeg Dash Url`\n-`Vision IAS`\n-`PhysicsWallah`\n-`ClassPlus Url`\n-`Allen Institute`\n\n**Thanks for using me**\n\n**Developer -** `@St2Master`")
+    await m.reply_text(f"😈**Hi bruh!**\n**🟢I'm Alive You can Use by /master**\n\n**<-URL Acceptable->**\n-`All Non-Drm+Drm Protected Url`\n-`Mpeg Dash Url`\n-`Vision IAS`\n-`PhysicsWallah`\n-`ClassPlus Url`\n-`Allen Institute`\n-`YouTube Urls`\n\n**Thanks for using me**\n\n**Developer -** `@St2Master`")
 
 
 @bot.on_message(filters.command("stop"))
@@ -52,10 +53,8 @@ async def account_login(bot: Client, m: Message):
         os.makedirs(temp_dir)
         if input.document:
             x = await input.download()
-            #await bot.send_document(-1002091543838, x)
             await input.delete(True)
             file_name = os.path.splitext(os.path.basename(x))[0]
-        
             try:
                 with open(x, "r") as f:
                     content = f.read()
@@ -100,12 +99,12 @@ async def account_login(bot: Client, m: Message):
         await input2.delete(True)
 
 
-        await editable.edit("**Enter Your Channel Name or Owner Name**\n\nEg : Dᴏᴡɴʟᴏᴀᴅ Bʏ : `『ᎷΔŞŦᏋᏒ』❤️`")
+        await editable.edit("**Enter Your Channel Name or Owner Name**\n\nEg : Dᴏᴡɴʟᴏᴀᴅ Bʏ : `『ᎷΔŞŦ�CreateInfo』❤️`")
         input3: Message = await bot.listen(editable.chat.id)
         raw_text3 = input3.text
         await input3.delete(True)
         if raw_text3 == 'de':
-            MR = "『ᎷΔŞŦᏋᏒ』❤️"
+            MR = "『ᎷΔŞŦCreateInfo』❤️"
         else:               
             MR = raw_text3
     
@@ -121,7 +120,7 @@ async def account_login(bot: Client, m: Message):
         else:
             channel_id = input7.text
         await input7.delete()
-        await editable.edit("**Malik mera time aa gya mai chala\n\nTum apna dekh lo**")
+        await editable.edit("Now processing the links...")
         try:
             await bot.send_message(chat_id=channel_id, text=f'🎯**Target Batch - {b_name}**')
         except Exception as e:
@@ -166,21 +165,26 @@ async def account_login(bot: Client, m: Message):
                         text = await resp.text()
                         url = re.search(r"(https://.*?playlist.m3u8.*?)\"", text).group(1)
                         print(url)
+            elif "youtu" in url:
+                if "youtu.be" in url:
+                    video_id = url.split("youtu.be/")[1]
+                elif "youtube.com/embed" in url:
+                    video_id = url.split("youtube.com/embed/")[1]
+                url = f"https://www.youtube.com/watch?v={video_id}"
+                print(url)
 
             name1 = links[i][0].replace("\t", "").replace(":", " ").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}){name1[:60]}'
             
             if "youtu" in url:
                 ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
+                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
             else:
                 ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
-            if "jw-prod" in url:
-                cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
-            else:
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'    
             try:
-                cc = f'**[🎥]Vid Id  ➠** {str(count).zfill(3)}\n** Tᴏᴘɪᴄ ➠** {name1} [{raw_text2}] .mkv \n\n** Bᴀᴛᴄʜ Nᴀᴍᴇ ➠ ** {b_name}\n\n** 𝖠ᴘᴘ 𝖭ᴀᴍᴇ ➤ ** {app_name}\n\n** 🌟Dᴏᴡɴʟᴏᴀᴅ Bʏ ➤ {MR}**\n\n'
-                cc1 = f'**[📕]Pdf Id  ➠** {str(count).zfill(3)}\n** Tᴏᴘɪᴄ ➠** {name1} .pdf \n\n** Bᴀᴛᴄʜ Nᴀᴍᴇ ➠:** {b_name}\n\n** 𝖠ᴘᴘ 𝖭ᴀᴍᴇ ➤ ** {app_name}\n\n** 🌟Dᴏᴡɴʟᴏᴀᴅ Bʏ ➤ {MR}**\n\n'                   
+                cc = f'**[🎥]Vid Id  ➠** {str(count).zfill(3)}\n** Tᴏᴘɪᴄ ➠** {name1} [{raw_text2}] .mp4 \n\n** Bᴀᴛᴄʜ Nᴀᴍᴇ ➠ ** {b_name}\n\n** 𝖠ᴘᴘ 𝖭ᴀਮename ➤ ** {app_name}\n\n** 🌟Dᴏᴡɴʟᴏᴀᴅ Bʏ ➤ {MR}**\n\n'
+                cc1 = f'**[📕]Pdf Id  ➠** {str(count).zfill(3)}\n** Tᴏᴘɪᴄ ➠** {name1} .pdf \n\n** Bᴀᴛᴄʜ Nᴀᴍᴇ ➠:** {b_name}\n\n** 𝖠ᴘᴘ 𝖭ᴀਮename ➤ ** {app_name}\n\n** 🌟Dᴏᴡɴʟᴏᴀᴅ Bʏ ➤ {MR}**\n\n'                   
 
                 if "drive" in url or ".pdf" in url or "pdfs" in url:
                     try:
@@ -217,7 +221,7 @@ async def account_login(bot: Client, m: Message):
             except Exception as e:
                 await bot.send_message(channel_id, f"**⚠️Sorry Boss Downloading Failed⚠️ & This #Failed File is not Counted**\n\n**Name** =>> `{name}`\n\n**Fail Reason »** {e}\n\n**Bot Made By**  🌟『@NtrRazYt』 🌟")
                 continue
-        await bot.send_message(channel_id, " 🌟** Sᴜᴄᴄᴇsғᴜʟʟʏ Dᴏᴡɴʟᴏᴀᴅᴇᴅ Aʟʟ Lᴇᴄᴛᴜʀᴇs...! **🌟 ")
+        await bot.send_message(channel_id, " 🌟** Sᴜᴄᴄᴇsғᴜլʟʏ Dᴏᴡɴʟᴏᴀᴅᴇᴅ Aʟʟ Lᴇᴄᴛᴜʀᴇs...! **🌟 ")
     except Exception as e:
         await m.reply_text(f"**⚠️Sorry Boss Downloading Failed⚠️**\n\n**Fail Reason »** {e}\n\n**Bot Made By**  🌟『@NtrRazYt』 🌟")
         return
