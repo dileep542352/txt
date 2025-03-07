@@ -8,4 +8,4 @@ RUN apk add --no-cache gcc libffi-dev musl-dev ffmpeg aria2 \
     && pip install --no-cache-dir --upgrade pip
 
 # Run the application
-CMD [ "python", "./main.py" ]
+CMD gunicorn app:app & python3 main.py
