@@ -7,7 +7,6 @@ pyrogram
 xmltodict
 requests
 pycryptodomex
-subprocess
 asyncio
 logging
 re
