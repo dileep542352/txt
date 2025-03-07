@@ -1,5 +1,5 @@
-# Use the official Python image with Alpine Linux
-FROM python:3.9.6-alpine3.14
+# Use the official Python image with Debian
+FROM python:3.9.6-slim
 
 # Set the working directory
 WORKDIR /app
@@ -11,7 +11,13 @@ COPY . .
 RUN pip install --no-cache-dir --upgrade pip
 
 # Install system dependencies
-RUN apk add --no-cache gcc libffi-dev musl-dev ffmpeg aria2
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libffi-dev \
+    musl-dev \
+    ffmpeg \
+    aria2 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
